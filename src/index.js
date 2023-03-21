@@ -58,15 +58,11 @@ async function handleLoadMore() {
       <b>Downloads</b>
     </p>
   </div>
-
-
-
-
         `
        ).join('');
         const markupPagination =  refDivGallery.insertAdjacentHTML('beforebegin', marcup)
          
-     galleryPagination(markupPagination)  
+    return galleryPagination(markupPagination)  
 }   
 
 
