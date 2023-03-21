@@ -25,7 +25,7 @@ const GalleryAPIServise = new API.GalleryAPIServise()
 
 async function handleForm(evt) { 
     evt.preventDefault()
-    const serchInput =  evt.currentTarget.elements.searchQuery.value
+    const serchInput =  evt.target.elements.searchQuery.value
     if (!serchInput) {
         return
     } 
@@ -58,15 +58,11 @@ async function handleLoadMore() {
       <b>Downloads</b>
     </p>
   </div>
-
-
-
-
         `
        ).join('');
         const markupPagination =  refDivGallery.insertAdjacentHTML('beforebegin', marcup)
          
-     galleryPagination(markupPagination)  
+    return galleryPagination(markupPagination)  
 }   
 
 
