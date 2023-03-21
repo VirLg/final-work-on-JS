@@ -40,6 +40,7 @@ async function handleLoadMore() {
   
 }
 
+
      function marcupSet(arr) {
          const marcup = arr.hits.map(el =>` 
 
