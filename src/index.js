@@ -32,9 +32,7 @@ marcupSet(await GalleryAPIServise.fetchGallery())
     }       
 async function handleLoadMore() { 
  
-    marcupSet(await GalleryAPIServise.fetchGallery())
-
-  
+    marcupSet(await GalleryAPIServise.fetchGallery())  
 }
      function marcupSet(arr) {
          const marcup = arr.hits.map(el =>` 
