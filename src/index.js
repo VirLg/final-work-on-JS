@@ -10,22 +10,19 @@ import API from './js/api-service'
 const refForm = document.querySelector('#search-form')
 const refDivGallery = document.querySelector('.gallery')
 
-const refFormInput = refForm.firstElementChild;
+// const refFormInput = refForm.firstElementChild;
 
-const refDiv = document.querySelector('.bg-container')
+// const refDiv = document.querySelector('.bg-container')
 const refLoadMore = document.querySelector('.load-more')
-
-
 
 refForm.addEventListener('submit', handleForm)
 refLoadMore.addEventListener('click',handleLoadMore)
 
 const GalleryAPIServise = new API.GalleryAPIServise()
 
-
 async function handleForm(evt) { 
     evt.preventDefault()
-    const serchInput =  evt.currentTarget.elements.searchQuery.value
+    const serchInput =  evt.target.elements.searchQuery.value
     if (!serchInput) {
         return
     } 
@@ -39,8 +36,6 @@ async function handleLoadMore() {
 
   
 }
-
-
      function marcupSet(arr) {
          const marcup = arr.hits.map(el =>` 
 
