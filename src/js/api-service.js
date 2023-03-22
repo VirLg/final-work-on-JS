@@ -11,7 +11,7 @@ class GalleryAPIServise {
     async fetchGallery() {
           console.log(this.requrefUlestApi);
         try {
-            const responce = await fetch(`${BEST_URL}/?key=${KEY}&category=${this.requestApi}&per_page=40,&page=${this.page}`)
+            const responce = await fetch(`${BEST_URL}/?key=${KEY}&q=${this.requestApi}&image_type=photo&orientation=horizontal&per_page=40,&page=${this.page}`)
         
             if (!responce.ok) {
                 throw new Error(responce.statusText)

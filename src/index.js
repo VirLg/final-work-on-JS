@@ -42,26 +42,26 @@ async function handleLoadMore() {
 
 
      function marcupSet(arr) {
-         const marcup = arr.hits.map(el =>` 
-
-  <a href="${el.largeImageURL}"><img src="${el.previewURL}" alt="" title="" loading="lazy"/></a> 
+       const marcup = arr.hits.map(({largeImageURL,previewURL,likes,views,comments}) =>` 
+<div class="photo-card">
+  <a href="${largeImageURL}"><img src="${previewURL}" alt="" title="" loading="lazy"/></a> 
   <div class="info">
-    <p class="info-item">s
-      <b>Likes</b>
+    <p class="info-item">
+      <b>Likes ${likes}</b>
     </p>
     <p class="info-item">
-      <b>Views</b>
+      <b>Views ${views}</b>
     </p>
     <p class="info-item">
-      <b>Comments</b>
+      <b>Comments ${comments}</b>
     </p>
     <p class="info-item">
       <b>Downloads</b>
     </p>
   </div>
-        `
-       ).join('');
-        const markupPagination =  refDivGallery.insertAdjacentHTML('beforebegin', marcup)
+  </div>
+        `).join('');
+        const markupPagination =  refDivGallery.insertAdjacentHTML('beforeend', marcup)
          
     return galleryPagination(markupPagination)  
 }   
