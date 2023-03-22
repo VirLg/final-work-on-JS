@@ -10,18 +10,15 @@ import API from './js/api-service'
 const refForm = document.querySelector('#search-form')
 const refDivGallery = document.querySelector('.gallery')
 
-const refFormInput = refForm.firstElementChild;
+// const refFormInput = refForm.firstElementChild;
 
-const refDiv = document.querySelector('.bg-container')
+// const refDiv = document.querySelector('.bg-container')
 const refLoadMore = document.querySelector('.load-more')
-
-
 
 refForm.addEventListener('submit', handleForm)
 refLoadMore.addEventListener('click',handleLoadMore)
 
 const GalleryAPIServise = new API.GalleryAPIServise()
-
 
 async function handleForm(evt) { 
     evt.preventDefault()
@@ -35,12 +32,8 @@ marcupSet(await GalleryAPIServise.fetchGallery())
     }       
 async function handleLoadMore() { 
  
-    marcupSet(await GalleryAPIServise.fetchGallery())
-
-  
+    marcupSet(await GalleryAPIServise.fetchGallery())  
 }
-
-
      function marcupSet(arr) {
        const marcup = arr.hits.map(({largeImageURL,previewURL,likes,views,comments}) =>` 
 <div class="photo-card">
