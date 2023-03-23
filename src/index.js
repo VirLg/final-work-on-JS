@@ -5,7 +5,12 @@ import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
 
+
+import LoadMore from './js/load-more'
 import API from './js/api-service'
+
+
+
 
 const refForm = document.querySelector('#search-form')
 const refDivGallery = document.querySelector('.gallery')
@@ -36,8 +41,10 @@ async function handleLoadMore() {
 }
      function marcupSet(arr) {
        const marcup = arr.hits.map(({largeImageURL,previewURL,likes,views,comments}) =>` 
-<div class="photo-card">
-  <a href="${largeImageURL}"><img src="${previewURL}" alt="" title="" loading="lazy"/></a> 
+  <div class="photo-card">
+  <div class="thumb">
+    <a href="${largeImageURL}"><img src="${previewURL}" alt="" title="" loading="lazy"/></a> 
+  </div>
   <div class="info">
     <p class="info-item">
       <b>Likes ${likes}</b>
@@ -74,3 +81,12 @@ const gallery = new SimpleLightbox('.gallery a',
     }
 );   
 }   
+
+const btnEl = new LoadMore.LoadMore();
+
+btnEl.btnDisable()
+
+// console.log(btn);
+
+
+
