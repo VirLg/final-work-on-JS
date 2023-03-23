@@ -1,27 +1,26 @@
+ 
+
 class LoadMore { 
+
     constructor() {
         
-
-        const btn = document.querySelector(".button")
+        this.btn = document.querySelector(".button")
         
-        btn.addEventListener('click', handleClick)
-        function handleClick(){ 
-        btn.classList.add("button--loading")
-        }
-
+ this.btn.addEventListener('click', ()=>this.btn.classList.add("button--loading"))      
     }
-
+    
     btnEnable() { 
-btn.disable= false
+        this.btn.disabled = false
+        
     }
 
 btnDisable() { 
-btn.disable= true
+this.btn.disabled= true
     }
 
 
+
+
 }
-
-
 
 export default {LoadMore}

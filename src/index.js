@@ -4,8 +4,6 @@ import SimpleLightbox from "simplelightbox";
 
 import "simplelightbox/dist/simple-lightbox.min.css";
 
-
-
 import LoadMore from './js/load-more'
 import API from './js/api-service'
 
@@ -15,15 +13,16 @@ import API from './js/api-service'
 const refForm = document.querySelector('#search-form')
 const refDivGallery = document.querySelector('.gallery')
 
-// const refFormInput = refForm.firstElementChild;
-
-// const refDiv = document.querySelector('.bg-container')
 const refLoadMore = document.querySelector('.load-more')
 
 refForm.addEventListener('submit', handleForm)
 refLoadMore.addEventListener('click',handleLoadMore)
 
 const GalleryAPIServise = new API.GalleryAPIServise()
+const btnEl = new LoadMore.LoadMore();
+
+
+new refLoadMore.btnEl.btnDisable()
 
 async function handleForm(evt) { 
     evt.preventDefault()
@@ -32,14 +31,19 @@ async function handleForm(evt) {
         return
     } 
     GalleryAPIServise.request=serchInput; 
-   
-marcupSet(await GalleryAPIServise.fetchGallery())
+   btnEl.btnDisable()
+  marcupSet(await GalleryAPIServise.fetchGallery())
+  
     }       
 async function handleLoadMore() { 
  
-    marcupSet(await GalleryAPIServise.fetchGallery())  
+  marcupSet(await GalleryAPIServise.fetchGallery()) 
+  
+
+
 }
-     function marcupSet(arr) {
+function marcupSet(arr) {
+       
        const marcup = arr.hits.map(({largeImageURL,previewURL,likes,views,comments}) =>` 
   <div class="photo-card">
   <div class="thumb">
@@ -82,11 +86,11 @@ const gallery = new SimpleLightbox('.gallery a',
 );   
 }   
 
-const btnEl = new LoadMore.LoadMore();
 
-btnEl.btnDisable()
 
-// console.log(btn);
+
+
+
 
 
 
