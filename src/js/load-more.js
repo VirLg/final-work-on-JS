@@ -1,26 +1,38 @@
- 
 
-class LoadMore { 
 
-    constructor() {
-        
-        this.btn = document.querySelector(".button")
-        
- this.btn.addEventListener('click', ()=>this.btn.classList.add("button--loading"))      
+
+
+class LoadMore {
+
+  
+    refBtnLoadMore = document.querySelectorAll('.spiner'); 
+refDiv = document.querySelectorAll('.spinner-load')
+
+    btnEnableSearch(){ 
+        this.refBtnLoadMore[0].disabled = false
+ this.refDiv[0].classList.remove('loader')
     }
-    
-    btnEnable() { 
-        this.btn.disabled = false
+    btnEnableLoader() { 
+        this.refBtnLoadMore[1].disabled = false 
+this.refDiv[1].classList.remove('loader')
+    }
+
+    btnDisabledSearch(){ 
+        this.refBtnLoadMore[0].disabled = true
+        this.refDiv[0].classList.add('loader')
+    }
+    btnDisabledLoader() { 
+        this.refBtnLoadMore[1].disabled = true 
+       this.refDiv[1].classList.add('loader')
+    }
+    btnIsHidden() { 
+        this.refBtnLoadMore[1].style.visibility = 'hidden';
         
     }
-
-btnDisable() { 
-this.btn.disabled= true
+     btnIsShow() { 
+        this.refBtnLoadMore[1].style.visibility='visible';
     }
-
-
-
-
 }
+
 
 export default {LoadMore}

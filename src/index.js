@@ -6,41 +6,49 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 
 import LoadMore from './js/load-more'
 import API from './js/api-service'
-
-
+// import Spinner from './js/spinner'
 
 
 const refForm = document.querySelector('#search-form')
-const refDivGallery = document.querySelector('.gallery')
+const refBtnSearch = refForm.lastElementChild
+const refBgContainer = document.querySelector('.bg-container')
+const refDivGallery = refBgContainer.firstElementChild
+const refBTNLoadMore=document.querySelector('.load-more')
 
-const refLoadMore = document.querySelector('.load-more')
+console.log(refBTNLoadMore);
+
 
 refForm.addEventListener('submit', handleForm)
-refLoadMore.addEventListener('click',handleLoadMore)
+refBTNLoadMore.addEventListener('click', handleLoadMore)
 
+  
 const GalleryAPIServise = new API.GalleryAPIServise()
-const btnEl = new LoadMore.LoadMore();
+
+const BTN = new LoadMore.LoadMore()
 
 
-new refLoadMore.btnEl.btnDisable()
 
+
+// BTN.btnDisabledLoader()
+// BTN.btnIsHidden()
+  
 async function handleForm(evt) { 
     evt.preventDefault()
     const serchInput =  evt.target.elements.searchQuery.value
     if (!serchInput) {
         return
     } 
-    GalleryAPIServise.request=serchInput; 
-   btnEl.btnDisable()
+  GalleryAPIServise.request = serchInput; 
+  
+ BTN.btnDisabledLoader()
+ BTN.btnIsShow()
   marcupSet(await GalleryAPIServise.fetchGallery())
   
-    }       
+}  
+         
 async function handleLoadMore() { 
- 
+  BTN.btnDisabledLoader()
   marcupSet(await GalleryAPIServise.fetchGallery()) 
-  
-
-
 }
 function marcupSet(arr) {
        
@@ -67,6 +75,9 @@ function marcupSet(arr) {
         `).join('');
         const markupPagination =  refDivGallery.insertAdjacentHTML('beforeend', marcup)
          
+  
+  BTN.btnEnableLoader()
+  BTN.btnEnableSearch()
     return galleryPagination(markupPagination)  
 }   
 
@@ -85,8 +96,6 @@ const gallery = new SimpleLightbox('.gallery a',
     }
 );   
 }   
-
-
 
 
 
