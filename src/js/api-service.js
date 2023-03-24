@@ -8,8 +8,10 @@ BTN.btnIsHidden()
 class GalleryAPIServise {
     constructor() {
         this.requestApi = '';
-        this.page = 1;
+        this.page = 1;  
     }
+ 
+    
     async fetchGallery() {
  BTN.btnDisabledSearch()
         try {
@@ -20,6 +22,13 @@ class GalleryAPIServise {
                 throw new Error(responce.statusText)
             }
             const data = await responce.json()
+            console.log(this.page);
+            console.log(this.requestApi);
+             if (data.totalHits === this.page||!data.totalHits) { 
+              
+                 BTN.btnIsHidden()
+                 this.page = 0;
+            }
             this.incrementPage()
             return data
         } catch (e) { 
@@ -30,12 +39,16 @@ class GalleryAPIServise {
         return this.requestApi
     }
     set request(newRequest) { 
-         this.requestApi = newRequest
+        this.requestApi = newRequest
     }
     incrementPage() { 
+       
         this.page+=1
+        
     }
-
+    resetPage() { 
+        this.page = 1;
+    }
 }        
 
 
