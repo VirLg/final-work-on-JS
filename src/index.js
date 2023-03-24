@@ -1,9 +1,7 @@
 
 
 import SimpleLightbox from "simplelightbox";
-
 import "simplelightbox/dist/simple-lightbox.min.css";
-
 import LoadMore from './js/load-more'
 import API from './js/api-service'
 // import Spinner from './js/spinner'
@@ -40,10 +38,11 @@ async function handleForm(evt) {
     } 
   GalleryAPIServise.request = serchInput; 
   
- BTN.btnDisabledLoader()
- BTN.btnIsShow()
-  marcupSet(await GalleryAPIServise.fetchGallery())
-  
+    BTN.btnDisabledLoader()
+  BTN.btnIsShow()
+  refDivGallery.innerHTML=''
+    marcupSet(await GalleryAPIServise.fetchGallery())
+ 
 }  
          
 async function handleLoadMore() { 
