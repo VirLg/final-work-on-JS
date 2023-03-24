@@ -2,10 +2,12 @@
 import LoadMore from './load-more'
 const BTN = new LoadMore.LoadMore()
 
-const BEST_URL = 'https://pixabay.com/api/';
-const KEY = '34368263-756a5eb3a3e360b335b61bac8';
+
 BTN.btnIsHidden()
 class GalleryAPIServise {
+ BEST_URL = 'https://pixabay.com/api/';
+ KEY = '34368263-756a5eb3a3e360b335b61bac8';
+ 
     constructor() {
         this.requestApi = '';
         this.page = 1;  
@@ -13,10 +15,19 @@ class GalleryAPIServise {
  
     
     async fetchGallery() {
+
+const searchParams = new URLSearchParams({
+per_page:40,
+image_type:"photo",
+orientation:"horizontal",  
+    });
+
+
+
  BTN.btnDisabledSearch()
         try {
             
-            const responce = await fetch(`${BEST_URL}/?key=${KEY}&q=${this.requestApi}&image_type=photo&orientation=horizontal&per_page=40,&page=${this.page}`)
+            const responce = await fetch(`${this.BEST_URL}/?key=${this.KEY}&q=${this.requestApi}&${searchParams}&page=${this.page}`)
         
             if (!responce.ok) {
                 throw new Error(responce.statusText)
