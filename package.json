@@ -2,10 +2,10 @@
   "name": "parcel-project-template",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://VirLg.github.io/goit-js-72-hw-11",
+  "homepage": "https://VirLg.github.io/final-work-on-JS",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /goit-js-72-hw-11/"
+    "build": "parcel build src/*.html --public-url /final-work-on-JS/"
   },
   "repository": {
     "type": "git",
