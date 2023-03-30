@@ -1,4 +1,5 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import axios from 'axios';
 import LoadMore from './load-more'
 const BTN = new LoadMore.LoadMore()
 
@@ -12,50 +13,57 @@ class GalleryAPIServise {
         this.requestApi = '';
         this.page = 1;  
         this.BTN = BTN.btnIsHidden();
+        this.per_page = 40;
     }
  
     
     async fetchGallery() {
 
-const searchParams = new URLSearchParams({
-    per_page:40,
-    image_type:"photo",
-    orientation: "horizontal",
-    q: this.requestApi,  
-    page: this.page,
-    safesearch:true,
-    });
-
-
-
- BTN.btnDisabledSearch()
+        const searchParams = new URLSearchParams({
+            per_page:this.per_page,
+            image_type: "photo",
+            orientation: "horizontal",
+            q: this.requestApi,
+            page: this.page,
+            safesearch: true,
+        });
+       
+        BTN.btnDisabledSearch()
         try {
-            
-            const responce = await fetch(`${this.BEST_URL}/?key=${this.KEY}&${searchParams}`)
-        
-            if (!responce.ok) {
+             console.log(searchParams);
+            const axi = await axios.get(`${this.BEST_URL}/?key=${this.KEY}&${searchParams}`)
+            const responce = axi.data;
+            console.log(responce);
+        const data = responce
+            if (axi.status !== 200) {
                 throw new Error(responce.statusText)
-            }
-            const data = await responce.json()
-            console.log(this.page);
-            console.log(this.requestApi);
-            console.log(data.totalHits);
-            
-            if (data.totalHits <= 40) { 
-                Notify.info("We're sorry, but you've reached the end of search results.") 
-                BTN.btnIsHidden()
-            }else if (data.totalHits === this.page || !data.totalHits) {
              
+            }   
+
+
+          else if (data.hits.length < this.per_page&&data.totalHits>=1) {
                
-                this.page = 0;
                 
-            } 
+                Notify.info("We're sorry, but you've reached the end of search results.");
+                 
+                BTN.btnIsHidden()
+                return data
+            } else if ( !data.totalHits) {
+             Notify.failure("Sorry, there are no images matching your search query. Please try again.");
+                this.page = 0;
+                // BTN.btnIsHidden()
+                // BTN. btnIsShowSearch()
+            }else{
+  
             this.incrementPage()
                 return data
                 
-        } catch (e) { 
-            console.log(e)
         }
+        
+                
+        } catch(e) {
+        console.log(e)
+    }
     }
     get request() { 
         return this.requestApi
