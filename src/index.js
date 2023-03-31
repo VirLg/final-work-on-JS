@@ -84,7 +84,20 @@ async function marcupSet(arr) {
   const markupPagination =  refDivGallery.insertAdjacentHTML('beforeend', marcup)
          
   BTN.btnEnableLoader()
-  BTN.btnEnableSearch()
+    BTN.btnEnableSearch()
+    
+
+
+
+// ====================================
+const observer = new IntersectionObserver(trueCallback, options);
+const target = document.querySelector('.info');
+observer.observe(target);
+
+
+// =================================
+
+
     return galleryPagination(markupPagination)  
 }   
 }
@@ -106,6 +119,33 @@ const a = document.body;
 a.style.backgroundColor = "azure"
 
 
+const options = {
+	root: document.querySelector( '#viewport' )
+  , // я закомментил строку, чтобы использовать значение по умолчанию
+  rootMargin: '100px',
+  intersectionRatio: 0.5,
+  threshold: 0.5,
+};
 
 
- 
+
+
+
+function trueCallback (entries, observer) {
+  entries.forEach(({ target, isIntersecting = false}) => {
+    // делаем что-либо для каждого переданного элемента (в нашем случае он один)
+  
+    // handleLoadMore()
+
+    console.log(window.viewport);
+    if (target.width<options.root) {
+      console.log('сработало');
+      handleLoadMore()
+      
+    }
+  
+		// например можно добавить какой-либо CSS-класс элементу
+		// entry.target.classList.add( 'some-class' );
+	});
+} 
+
