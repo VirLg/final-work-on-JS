@@ -6,15 +6,25 @@ import API from './js/api-service'
 
 
 
+
+
+
+
 const refForm = document.querySelector('#search-form')
 const refBtnSearch = refForm.lastElementChild
 const refBgContainer = document.querySelector('.bg-container')
 const refDivGallery = refBgContainer.firstElementChild
 const refBTNLoadMore = document.querySelector('.load-more')
 const refLable = document.querySelector('.info-picter')
+const refSentinel = document.querySelector('#sentinel')
+// console.log(refSentinel);
 
 refForm.addEventListener('submit', handleForm)
 refBTNLoadMore.addEventListener('click', handleLoadMore)
+
+
+
+
 
 const GalleryAPIServise = new API.GalleryAPIServise()
 const BTN = new LoadMore.LoadMore
@@ -37,18 +47,15 @@ async function handleForm(evt) {
 }  
    async       function handleLoadMore() { 
   BTN.btnDisabledLoader()
-  
+
+     
  marcupSet( await GalleryAPIServise.fetchGallery()) 
 
 }
 
 async function marcupSet(arr) {
- 
-
 
   if (await !arr) {
-   
-  
     BTN.btnIsHidden()
     BTN.btnIsShowSearch()
     BTN.refBtnLoadMore[0].disabled=false
@@ -86,18 +93,6 @@ async function marcupSet(arr) {
   BTN.btnEnableLoader()
     BTN.btnEnableSearch()
     
-
-
-
-// ====================================
-const observer = new IntersectionObserver(trueCallback, options);
-const target = document.querySelector('.info');
-observer.observe(target);
-
-
-// =================================
-
-
     return galleryPagination(markupPagination)  
 }   
 }
@@ -115,37 +110,27 @@ const gallery = new SimpleLightbox('.gallery a',
 );   
 }   
 
+
+
+async function onObserver (entries) { 
+  await entries.forEach(entri => { 
+    if (entri.isIntersecting||pageXOffset) { 
+       
+handleLoadMore()
+     }
+     
+   } )
+}
+
+const options = {
+  rootMargin:'-100px',
+}
+const observer = new IntersectionObserver(onObserver, options)
+observer.observe(refSentinel)
+
+
 const a = document.body;
 a.style.backgroundColor = "azure"
 
 
-const options = {
-	root: document.querySelector( '#viewport' )
-  , // я закомментил строку, чтобы использовать значение по умолчанию
-  rootMargin: '100px',
-  intersectionRatio: 0.5,
-  threshold: 0.5,
-};
-
-
-
-
-
-function trueCallback (entries, observer) {
-  entries.forEach(({ target, isIntersecting = false}) => {
-    // делаем что-либо для каждого переданного элемента (в нашем случае он один)
-  
-    // handleLoadMore()
-
-    console.log(window.viewport);
-    if (target.width<options.root) {
-      console.log('сработало');
-      handleLoadMore()
-      
-    }
-  
-		// например можно добавить какой-либо CSS-класс элементу
-		// entry.target.classList.add( 'some-class' );
-	});
-} 
 
