@@ -5,11 +5,6 @@ import LoadMore from './js/load-more'
 import API from './js/api-service'
 import observer from "./js/observer";
 
-
-
-
-
-
 const refForm = document.querySelector('#search-form')
 const refBtnSearch = refForm.lastElementChild
 const refBgContainer = document.querySelector('.bg-container')
@@ -17,14 +12,12 @@ const refDivGallery = refBgContainer.firstElementChild
 const refBTNLoadMore = document.querySelector('.load-more')
 const refLable = document.querySelector('.info-picter')
 const refSentinel = document.querySelector('#sentinel')
-// console.log(refSentinel);
+
 
 refForm.addEventListener('submit', handleForm)
-// refBTNLoadMore.addEventListener('click', handleLoadMore)
+
 const BTN = new LoadMore.LoadMore
-
 const GalleryAPIServise = new API.GalleryAPIServise()
-
 
 async function handleForm(evt) { 
     evt.preventDefault()
@@ -35,17 +28,12 @@ async function handleForm(evt) {
         return
     } 
   GalleryAPIServise.request = serchInput; 
-  
-    // BTN.btnDisabledLoader()
     BTN.btnIsShow()
   refDivGallery.innerHTML = ''
   marcupSet(await GalleryAPIServise.fetchGallery())  
-
 }  
-   async       function handleLoadMore() { 
-  // BTN.btnDisabledLoader()
 
-     
+async function handleLoadMore() {      
  marcupSet( await GalleryAPIServise.fetchGallery()) 
 
 }
@@ -93,6 +81,7 @@ async function marcupSet(arr) {
     return galleryPagination(markupPagination)  
 }   
 }
+
 function galleryPagination(markupPagination) { 
 const gallery = new SimpleLightbox('.gallery a',
     {
