@@ -3,7 +3,7 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import LoadMore from './js/load-more'
 import API from './js/api-service'
-
+import observer from "./js/observer";
 
 
 
@@ -20,14 +20,11 @@ const refSentinel = document.querySelector('#sentinel')
 // console.log(refSentinel);
 
 refForm.addEventListener('submit', handleForm)
-refBTNLoadMore.addEventListener('click', handleLoadMore)
-
-
-
-
+// refBTNLoadMore.addEventListener('click', handleLoadMore)
+const BTN = new LoadMore.LoadMore
 
 const GalleryAPIServise = new API.GalleryAPIServise()
-const BTN = new LoadMore.LoadMore
+
 
 async function handleForm(evt) { 
     evt.preventDefault()
@@ -39,14 +36,14 @@ async function handleForm(evt) {
     } 
   GalleryAPIServise.request = serchInput; 
   
-    BTN.btnDisabledLoader()
+    // BTN.btnDisabledLoader()
     BTN.btnIsShow()
   refDivGallery.innerHTML = ''
   marcupSet(await GalleryAPIServise.fetchGallery())  
 
 }  
    async       function handleLoadMore() { 
-  BTN.btnDisabledLoader()
+  // BTN.btnDisabledLoader()
 
      
  marcupSet( await GalleryAPIServise.fetchGallery()) 
@@ -56,7 +53,7 @@ async function handleForm(evt) {
 async function marcupSet(arr) {
 
   if (await !arr) {
-    BTN.btnIsHidden()
+    // BTN.btnIsHidden()
     BTN.btnIsShowSearch()
     BTN.refBtnLoadMore[0].disabled=false
     return
@@ -112,25 +109,9 @@ const gallery = new SimpleLightbox('.gallery a',
 
 
 
-async function onObserver (entries) { 
-  await entries.forEach(entri => { 
-    if (entri.isIntersecting||pageXOffset) { 
-       
-handleLoadMore()
-     }
-     
-   } )
-}
-
-const options = {
-  rootMargin:'-100px',
-}
-const observer = new IntersectionObserver(onObserver, options)
-observer.observe(refSentinel)
-
-
 const a = document.body;
 a.style.backgroundColor = "azure"
 
 
 
+export default {handleLoadMore}

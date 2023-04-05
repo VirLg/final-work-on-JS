@@ -1,23 +1,27 @@
+import handleLoadMore from '../index'
 
-// const target = document.querySelector('#sentinel');
-//  function handleObserve() { 
-// const onObserver =(entries)=> {
-//   entries.forEach(entry => {
-//     if (entry.isIntersecting) {
-//       handleLoadMore()
-//     }
-// })
-// }
-// const options = {}
-// const observer = new IntersectionObserver(onObserver, options)
+const refSentinel = document.querySelector('#sentinel')
+const target = document.querySelector('#sentinel');
 
-// observer.observe(target)
-// }
+async function onObserver (entries) { 
+  await entries.forEach(entri => { 
+    if (entri.isIntersecting||pageXOffset) { 
+       
+handleLoadMore.handleLoadMore()
+     }
+     
+   } )
+}
+
+const options = {
+  rootMargin:'-100px',
+}
+const observer = new IntersectionObserver(onObserver, options)
+observer.observe(refSentinel)
 
 
 
-
-// export default { handleObserve}
+export default { observer}
 
 
 

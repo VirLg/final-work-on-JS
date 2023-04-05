@@ -1,10 +1,11 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import axios from 'axios';
 import LoadMore from './load-more'
+import observer from './observer';
 const BTN = new LoadMore.LoadMore()
 
 
-BTN.btnIsHidden()
+
 class GalleryAPIServise {
  BEST_URL = 'https://pixabay.com/api/';
  KEY = '34368263-756a5eb3a3e360b335b61bac8';
@@ -12,7 +13,7 @@ class GalleryAPIServise {
     constructor() {
         this.requestApi = '';
         this.page = 1;  
-        this.BTN = BTN.btnIsHidden();
+       
         this.per_page = 40;
     }
  
@@ -46,13 +47,12 @@ class GalleryAPIServise {
                 
                 Notify.info("We're sorry, but you've reached the end of search results.");
                  
-                BTN.btnIsHidden()
+                observer.observer.unobserve(document.querySelector('#sentinel'));
                 return data
             } else if ( !data.totalHits) {
              Notify.failure("Sorry, there are no images matching your search query. Please try again.");
                 this.page = 0;
-                // BTN.btnIsHidden()
-                // BTN. btnIsShowSearch()
+        return
             }else{
   
             this.incrementPage()

@@ -13,8 +13,8 @@ refDiv = document.querySelectorAll('.spinner-load')
  this.refDiv[0].classList.remove('loader')
     }
     btnEnableLoader() { 
-        this.refBtnLoadMore[1].disabled = false 
-this.refDiv[1].classList.remove('loader')
+        // this.refBtnLoadMore[1].disabled = false 
+// this.refDiv[1].classList.remove('loader')
     }
 
     btnDisabledSearch(){ 
@@ -26,11 +26,11 @@ this.refDiv[1].classList.remove('loader')
        this.refDiv[1].classList.add('loader')
     }
     btnIsHidden() { 
-        this.refBtnLoadMore[1].style.visibility = 'hidden';
+        // this.refBtnLoadMore[1].style.visibility = 'hidden';
         
     }
      btnIsShow() { 
-        this.refBtnLoadMore[1].style.visibility='visible';
+        // this.refBtnLoadMore[1].style.visibility='visible';
      }
     
     btnIsShowSearch() { 
